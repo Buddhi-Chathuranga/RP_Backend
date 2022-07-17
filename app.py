@@ -83,7 +83,7 @@ def addUserFunction():
                     "$oid":"UsedEmail"
                     }
             }
-            return jsonify(user_obj)
+            return jsonify(data)
         else:
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
                         height = "", age = "", highBP = "", colLev = "", SBP = "", stoke = "", heAlCo = "")
