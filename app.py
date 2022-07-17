@@ -74,15 +74,25 @@ def addUserFunction():
         phone = request_json.get('phone')
         email = request_json.get('email')
         password = request_json.get('password')
-        
 
-        user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
-                    height = "", age = "", highBP = "", colLev = "", SBP = "", stoke = "", heAlCo = "")
-        user1.save()
-        data = {
-            'Message': "Success"
-        }
-        return jsonify(data)
+
+        user_obj = User.objects(email=email).first()
+        if (user_obj):
+            data = {
+                "_id":{
+                    "$oid":"UsedEmail"
+                    }
+            }
+            return jsonify(user_obj)
+        else:
+            user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
+                        height = "", age = "", highBP = "", colLev = "", SBP = "", stoke = "", heAlCo = "")
+            user1.save()
+            data = {
+                'Message': "Success"
+            }
+            return jsonify(data)
+
     except Exception as e:
         data = {
             'Message': e
@@ -111,7 +121,7 @@ def update_User():
 
 
 
-        # User.update({"_id": ObjectId(user_id)}, {"$set" : {"name" :'eee'}})
+        User.update({"_id": ObjectId(user_id)}, {"$set" : {"name" :'eee'}})
 
         # u = User.objects(id=user_id).first()
         # u.update({"name" :'eee'})
