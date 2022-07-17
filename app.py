@@ -79,9 +79,7 @@ def addUserFunction():
         user_obj = User.objects(email=email).first()
         if (user_obj):
             data = {
-                "_id":{
-                    "$oid":"UsedEmail"
-                    }
+                "Message":"UsedEmail"
             }
             return jsonify(data)
         else:
