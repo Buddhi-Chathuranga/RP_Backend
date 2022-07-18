@@ -129,7 +129,7 @@ def update_User():
            # "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stroke" :stroke, "heAlCo" :heAlCo }})
 
         User.objects(id=uid).update(gender =gender, weight =weight, height =height, 
-            age =age, highBP =highBP, colLev =colLev, SBP =SBP, stroke =stroke, heAlCo=heAlCo }})
+            age =age, highBP =highBP, colLev =colLev, SBP =SBP, stroke =stroke, heAlCo=heAlCo )
 
         # u = User.objects(id=user_id).first()
         # u.update({"name" :'eee'})
