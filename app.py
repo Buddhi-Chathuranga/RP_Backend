@@ -113,13 +113,20 @@ def update_User():
     try:
         request_json = request.get_json()
         uid = request_json.get('id')
+        gender = request_json.get('gender')
+        weight = request_json.get('weight')
+        height = request_json.get('height')
+        age = request_json.get('age')
+        highBP = request_json.get('highBP')
+        colLev = request_json.get('colLev')
+        SBP = request_json.get('SBP')
+        stoke = request_json.get('stoke')
+        heAlCo = request_json.get('heAlCo')
 
         # User.objects(id=uid).update(email="Updateed")
 
-
-
-
-        User.update({"_id": ObjectId(user_id)}, {"$set" : {"name" :'eee'}})
+        User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
+            "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stoke" :stoke, "heAlCo" :heAlCo, }})
 
         # u = User.objects(id=user_id).first()
         # u.update({"name" :'eee'})
@@ -130,7 +137,7 @@ def update_User():
         output = {'message' : 'item updated'}
         return output
     except Exception as e:
-        output = {'error' : str(e)}
+        output = {'message' : str(e)}
         return output
 
 
