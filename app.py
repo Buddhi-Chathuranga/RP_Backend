@@ -126,7 +126,7 @@ def update_User():
         # User.objects(id=uid).update(email="Updateed")
 
         User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
-            "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stoke" :stoke, "heAlCo" :heAlCo, }})
+            "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stoke" :stoke, "heAlCo" :heAlCo }})
 
         # u = User.objects(id=user_id).first()
         # u.update({"name" :'eee'})
