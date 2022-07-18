@@ -32,7 +32,7 @@ class User(db.Document):
     highBP = db.StringField()
     colLev = db.StringField()
     SBP = db.StringField()
-    stoke = db.StringField()
+    stroke = db.StringField()
     heAlCo = db.StringField()
 
     def to_json(self):
@@ -49,7 +49,7 @@ class User(db.Document):
             "highBP":self.highBP,
             "colLev":self.colLev,
             "SBP":self.SBP,
-            "stoke":self.stoke,
+            "stroke":self.stroke,
             "heAlCo":self.heAlCo,
         }
 
