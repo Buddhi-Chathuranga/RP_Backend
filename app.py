@@ -123,7 +123,8 @@ def update_User():
         stroke = request_json.get('stroke')
         heAlCo = request_json.get('heAlCo')
 
-        User.objects(id=uid).update(email="Updateed")
+        User.objects(id=uid).update(gender =gender, weight =weight, height =height, 
+            age =age, highBP =highBP, colLev =colLev, SBP =SBP, stroke =stroke, heAlCo=heAlCo)
 
         #User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
            # "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stroke" :stroke, "heAlCo" :heAlCo }})
