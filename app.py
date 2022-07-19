@@ -84,7 +84,7 @@ def addUserFunction():
             return jsonify(data)
         else:
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
-                        height = "", age = "", highBP = "", colLev = "", SBP = "", stroke = "", heAlCo = "")
+                        height = "", age = "", highBP = "", colLev = "", SBP = "", heAlCo = "", stroke = "")
             user1.save()
             data = {
                 'Message': "Success"
@@ -123,8 +123,8 @@ def update_User():
         stroke = request_json.get('stroke')
         heAlCo = request_json.get('heAlCo')
 
-        User.objects(id=uid).update(gender =gender, weight =weight, height =height, 
-            age =age, highBP =highBP, colLev =colLev, SBP =SBP, stroke =stroke, heAlCo=heAlCo)
+        User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
+            age = age, highBP = highBP, colLev = colLev, SBP =SBP, stroke = stroke, heAlCo = heAlCo)
 
         #User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
            # "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stroke" :stroke, "heAlCo" :heAlCo }})
