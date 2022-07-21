@@ -84,6 +84,7 @@ def addUserFunction():
             }
             return jsonify(data)
         else:
+            
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
                         height = "", age = "", colLev = "", heartRate = "", stroke = "", entireLife100Cigarettes = "", cigarettePerDay = "")
             user1.save()
