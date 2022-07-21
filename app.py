@@ -118,26 +118,15 @@ def update_User():
         weight = request_json.get('weight')
         height = request_json.get('height')
         age = request_json.get('age')
-        highBP = request_json.get('highBP')
-        colLev = request_json.get('colLev')
-        SBP = request_json.get('SBP')
-        stroke = request_json.get('stroke')
+        colLev = request_json.get('highBP')
+        heartRate = request_json.get('colLev')
+        stroke = request_json.get('SBP')
+        entireLife100Cigarettes = request_json.get('stroke')
         cigarettePerDay = request_json.get('heAlCo')
+
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay)
-
-        #User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
-           # "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stroke" :stroke, "heAlCo" :heAlCo }})
-
-        #User.objects(id=uid).update(gender =gender, weight =weight, height =height, 
-            #age =age, highBP =highBP, colLev =colLev, SBP =SBP, stroke =stroke, heAlCo=heAlCo)
-
-        # u = User.objects(id=user_id).first()
-        # u.update({"name" :'eee'})
-        # u.save()
-
-        # user_obj._save_update({"name": "b"}, {"$set":{"phone": 88}})
 
         output = {'message' : 'Success'}
         return output
