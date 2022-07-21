@@ -29,11 +29,14 @@ class User(db.Document):
     weight = db.StringField()
     height = db.StringField()
     age = db.StringField()
-    highBP = db.StringField()
     colLev = db.StringField()
-    SBP = db.StringField()
+    heartRate = db.StringField()
     stroke = db.StringField()
-    heAlCo = db.StringField()
+    entireLife100Cigarettes = db.StringField()
+    cigarettePerDay = db.StringField()
+
+    gender = gender, weight = weight, height = height, 
+            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay
 
     def to_json(self):
         return  {
@@ -46,11 +49,11 @@ class User(db.Document):
             "weight":self.weight,
             "height":self.height,
             "age":self.age,
-            "highBP":self.highBP,
             "colLev":self.colLev,
-            "SBP":self.SBP,
+            "heartRate":self.heartRate,
             "stroke":self.stroke,
-            "heAlCo":self.heAlCo,
+            "entireLife100Cigarettes":self.entireLife100Cigarettes,
+            "cigarettePerDay":self.cigarettePerDay,
         }
 
 
@@ -121,10 +124,10 @@ def update_User():
         colLev = request_json.get('colLev')
         SBP = request_json.get('SBP')
         stroke = request_json.get('stroke')
-        heAlCo = request_json.get('heAlCo')
+        cigarettePerDay = request_json.get('heAlCo')
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
-            age = age, highBP = highBP, colLev = colLev, SBP =SBP, stroke = stroke, heAlCo = heAlCo)
+            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay)
 
         #User.update({"_id": ObjectId(uid)}, {"$set" : {"gender" :gender, "weight" :weight, "height" :height, 
            # "age" :age, "highBP" :highBP, "colLev" :colLev, "SBP" :SBP, "stroke" :stroke, "heAlCo" :heAlCo }})
