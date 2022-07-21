@@ -35,8 +35,6 @@ class User(db.Document):
     entireLife100Cigarettes = db.StringField()
     cigarettePerDay = db.StringField()
 
-    gender = gender, weight = weight, height = height, 
-            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay
 
     def to_json(self):
         return  {
@@ -87,7 +85,7 @@ def addUserFunction():
             return jsonify(data)
         else:
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
-                        height = "", age = "", highBP = "", colLev = "", SBP = "", heAlCo = "", stroke = "")
+                        height = "", age = "", colLev = "", heartRate = "", stroke = "", entireLife100Cigarettes = "", cigarettePerDay = "")
             user1.save()
             data = {
                 'Message': "Success"
