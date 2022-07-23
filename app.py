@@ -57,7 +57,6 @@ class User(db.Document):
 
 @app.route('/',methods=['GET'])
 def testing():
-
     return 'Testing Page!'
 
 @app.route('/test',methods=['GET'])
@@ -75,7 +74,6 @@ def addUserFunction():
         phone = request_json.get('phone')
         email = request_json.get('email')
         password = request_json.get('password')
-
 
         user_obj = User.objects(email=email).first()
         if (user_obj):
@@ -118,17 +116,16 @@ def update_User():
         weight = request_json.get('weight')
         height = request_json.get('height')
         age = request_json.get('age')
-        colLev = request_json.get('highBP')
-        heartRate = request_json.get('colLev')
-        stroke = request_json.get('SBP')
-        entireLife100Cigarettes = request_json.get('stroke')
-        cigarettePerDay = request_json.get('heAlCo')
-
+        colLev = request_json.get('colLev')
+        heartRate = request_json.get('heartRate')
+        stroke = request_json.get('stroke')
+        entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
+        cigarettePerDay = request_json.get('cigarettePerDay')
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay)
 
-        output = {'message' : 'Success'}
+        output = {'message' : 'Success!'}
         return output
     except Exception as e:
         output = {'message' : str(e)}
