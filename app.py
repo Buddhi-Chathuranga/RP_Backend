@@ -6,6 +6,8 @@ from typing import Collection
 import pymongo
 from bson import ObjectId 
 
+import pickle
+
 from flask import Flask, request, make_response , jsonify
 from flask_mongoengine import MongoEngine
 
@@ -131,6 +133,38 @@ def update_User():
         output = {'message' : str(e)}
         return output
 
+
+@app.route('/predict',methods=['GET'])
+def Predict():
+    request_json = request.get_json()
+    uid = request_json.get('id')
+    gender = request_json.get('gender')
+    weight = request_json.get('weight')
+    height = request_json.get('height')
+    age = request_json.get('age')
+    colLev = request_json.get('colLev')
+    heartRate = request_json.get('heartRate')
+    stroke = request_json.get('stroke')
+    entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
+    cigarettePerDay = request_json.get('cigarettePerDay')
+
+    currentSmoker = 1
+    if(cigarettePerDay>=1):
+        currentSmoker = 1
+
+
+    BMI = weight/(height*height)
+
+    BPMeds=0
+    if (heartRate>=90):
+        BPMeds=1
+
+
+    loaded_model = pickle.load(open('model/Heart.pickle', 'rb'))
+    result = loaded_model.predict([[gender, age, currentSmoker, cigarettePerDay, BPMeds, stroke, colLev, BMI, heartRate]])
+
+
+    return result
 
 
 @app.route('/authUser',methods=['POST'])
