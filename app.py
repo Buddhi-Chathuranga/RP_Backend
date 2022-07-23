@@ -135,7 +135,7 @@ def update_User():
 
 
 @app.route('/predict',methods=['GET'])
-def Predict():
+def Predict_d():
     try:
         request_json = request.get_json()
         uid = request_json.get('id')
@@ -149,22 +149,24 @@ def Predict():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
 
-        currentSmoker = 1
-        if(cigarettePerDay>=1):
-            currentSmoker = 1
+        # currentSmoker = 1
+        # if(cigarettePerDay>=1):
+        #     currentSmoker = 1
 
 
-        BMI = weight/(height*height)
+        # BMI = weight/(height*height)
 
-        BPMeds=0
-        if (heartRate>=90):
-            BPMeds=1
+        # BPMeds=0
+        # if (heartRate>=90):
+        #     BPMeds=1
 
-
+        result="ok"
         loaded_model = pickle.load(open('model/Heart.pickle', 'rb'))
-        result = loaded_model.predict([[gender, age, currentSmoker, cigarettePerDay, BPMeds, stroke, colLev, BMI, heartRate]])
+        # result = loaded_model.predict([[gender, age, currentSmoker, cigarettePerDay, BPMeds, stroke, colLev, BMI, heartRate]])
+        result = loaded_model.predict([[1, 39, 0, 0.0, 0.0, 0, 195.0, 26.97, 80.0]])
     except Exception as e:
-        result = e
+        output = {'message' : str(e)}
+        return output
 
 
     return result
