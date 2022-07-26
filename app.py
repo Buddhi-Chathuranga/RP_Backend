@@ -130,7 +130,7 @@ def update_User():
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds)
 
-        output = {'Mssage' : 'Success'}
+        output = {'Message' : 'Success'}
         return output
     except Exception as e:
         output = {'Message' : str(e)}
@@ -141,7 +141,6 @@ def update_User():
 def Predict_d():
     try:
         request_json = request.get_json()
-        uid = request_json.get('id')
         gender = request_json.get('gender')
         weight = request_json.get('weight')
         height = request_json.get('height')
