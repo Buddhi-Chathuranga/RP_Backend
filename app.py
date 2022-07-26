@@ -130,10 +130,10 @@ def update_User():
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds)
 
-        output = {'Message' : 'Success'}
+        output = {'Msg' : 'Success'}
         return output
     except Exception as e:
-        output = {'Message' : str(e)}
+        output = {'Msg' : str(e)}
         return output
 
 
