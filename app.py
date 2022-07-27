@@ -37,6 +37,7 @@ class User(db.Document):
     entireLife100Cigarettes = db.StringField()
     cigarettePerDay = db.StringField()
     BPMeds = db.StringField()
+    BP = db.StringField()
 
 
     def to_json(self):
@@ -56,6 +57,7 @@ class User(db.Document):
             "entireLife100Cigarettes":self.entireLife100Cigarettes,
             "cigarettePerDay":self.cigarettePerDay,
             "BPMeds":self.BPMeds,
+            "BP":self.BP,
         }
 
 
@@ -87,7 +89,7 @@ def addUserFunction():
             return jsonify(data)
         else: 
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
-                        height = "", age = "", colLev = "", heartRate = "", stroke = "", entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="")
+                        height = "", age = "", colLev = "", heartRate = "", stroke = "", entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="", BP ="")
             user1.save()
             data = {
                 'Message': "Success"
@@ -126,9 +128,10 @@ def update_User():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
+        BP = request_json.get('BP')
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
-            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds)
+            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, BP = BP)
 
         output = {'Msg' : 'Success'}
         return output
@@ -151,19 +154,52 @@ def Predict_d():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
+        BP = request_json.get('BP')
+
+        Age = int(age)
+        if( 18<=Age<=24 ):
+            F_Age=1
+        elif( 25<=Age<=29 ):
+            F_Age=2
+        elif( 30<=Age<=34 ):
+            F_Age=3
+        elif( 35<=Age<=39 ):
+            F_Age=4
+        elif( 40<=Age<=44 ):
+            F_Age=5
+        elif( 45<=Age<=49 ):
+            F_Age=6
+        elif( 50<=Age<=54 ):
+            F_Age=7
+        elif( 55<=Age<=59 ):
+            F_Age=8
+        elif( 60<=Age<=64 ):
+            F_Age=9
+        elif( 65<=Age<=69 ):
+            F_Age=10
+        elif( 70<=Age<=74 ):
+            F_Age=11
+        elif( 75<=Age<=79 ):
+            F_Age=12
+        elif( Age>=80 ):
+            F_Age=13
 
         currentSmoker = 1
         if(cigarettePerDay>=1):
             currentSmoker = 1
 
-
         BMI = weight/(height*height)
 
-        result="ok"
-        loaded_model = pickle.load(open('model/Heart.pickle', 'rb'))
-        re = loaded_model.predict([[gender, age, currentSmoker, cigarettePerDay, BPMeds, stroke, colLev, BMI, heartRate]])
+        loaded_model_Heart = pickle.load(open('model/Heart.pickle', 'rb'))
+        reHeart = loaded_model_Heart.predict([[gender, F_Age, currentSmoker, cigarettePerDay, BPMeds, stroke, colLev, BMI, heartRate]])
         # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
-        result = str(re[0])
+        resultHeart = str(reHeart[0])
+
+        loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
+        reDiabetes = loaded_model_Diabetes.predict([[F_HighBP, F_HighChol, F_BMI, F_Smoker, F_DiffWalk, F_Sex, F_Age]])
+        # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
+        resultDiabetes = str(reDiabetes[0])
+
     except Exception as e:
         output = {'message' : str(e)}
         return output
