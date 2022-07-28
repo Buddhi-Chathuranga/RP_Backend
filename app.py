@@ -36,7 +36,7 @@ class User(db.Document):
     colLev = db.StringField()
     heartRate = db.StringField()
     stroke = db.StringField()
-    currentSmorker = db.StringField()
+    currentSmoker = db.StringField()
     entireLife100Cigarettes = db.StringField()
     cigarettePerDay = db.StringField()
     BPMeds = db.StringField()
@@ -59,7 +59,7 @@ class User(db.Document):
             "colLev":self.colLev,
             "heartRate":self.heartRate,
             "stroke":self.stroke,
-            "currentSmorker":self.currentSmorker,
+            "currentSmoker":self.currentSmoker,
             "entireLife100Cigarettes":self.entireLife100Cigarettes,
             "cigarettePerDay":self.cigarettePerDay,
             "BPMeds":self.BPMeds,
@@ -98,7 +98,7 @@ def addUserFunction():
             return jsonify(data)
         else: 
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
-                        height = "", age = "", colLev = "", heartRate = "", stroke = "",currentSmorker="", 
+                        height = "", age = "", colLev = "", heartRate = "", stroke = "",currentSmoker="", 
                         entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="", BP ="", DifWalk="", 
                         heartRisk="", diabetesRisk="")
             user1.save()
@@ -136,7 +136,7 @@ def update_User():
         colLev = request_json.get('colLev')
         heartRate = request_json.get('heartRate')
         stroke = request_json.get('stroke')
-        currentSmorker= request_json.get('currentSmorker')
+        currentSmoker= request_json.get('currentSmoker')
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
@@ -145,7 +145,7 @@ def update_User():
 
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
-            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmorker = currentSmorker, 
+            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmoker = currentSmoker, 
             entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, 
             BP = BP, DifWalk=DifWalk)
 
@@ -170,7 +170,7 @@ def Predict_d():
         colLev = user_obj["colLev"]
         heartRate = int(user_obj["heartRate"])
         stroke = user_obj["stroke"]
-        currentSmorker = user_obj["currentSmorker"]
+        currentSmoker = user_obj["currentSmoker"]
         entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
         cigarettePerDay = int(user_obj["cigarettePerDay"])
         BPMeds = user_obj["BPMeds"]
@@ -208,7 +208,7 @@ def Predict_d():
             F_Age=13
 
         F_currentSmoker = 1
-        if(currentSmorker=="No"):
+        if(currentSmoker=="No"):
             F_currentSmoker = 0
 
         BMI = weight/(height*height)
