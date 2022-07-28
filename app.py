@@ -167,7 +167,7 @@ def Predict_d():
         weight = int(user_obj["weight"])
         height = int(user_obj["height"])
         age = int(user_obj["age"])
-        colLev = user_obj["colLev"]
+        colLev = int(user_obj["colLev"])
         heartRate = int(user_obj["heartRate"])
         stroke = user_obj["stroke"]
         currentSmoker = user_obj["currentSmoker"]
@@ -177,9 +177,10 @@ def Predict_d():
         BP = user_obj["BP"]
         DifWalk = user_obj["DifWalk"]
         heartRisk = user_obj["heartRisk"]
-        DifWalk = user_obj["DifWalk"]
+        DiabetesRisk = user_obj["diabetesRisk"]
 
         Age = age
+        F_Age = 0
         if( 18<=Age<=24 ):
             F_Age=1
         elif( 25<=Age<=29 ):
@@ -211,11 +212,23 @@ def Predict_d():
         if(currentSmoker=="No"):
             F_currentSmoker = 0
 
+        F_stroke=1
+        if(stroke=="No"):
+            F_stroke=0
+
         BMI = weight/(height*height)
 
+        F_DifWalk=1
+        if(DifWalk=="No"):
+            F_DifWalk=0
+        
         F_Gender=1
         if(gender=="Female"):
             F_Gender=0
+
+        F_entireLife100Cigarettes=1
+        if(entireLife100Cigarettes=="No"):
+            F_entireLife100Cigarettes=0
 
         F_BPMeds=1
         if(str(BPMeds)=="No"):
@@ -223,18 +236,18 @@ def Predict_d():
     
 
         loaded_model_Heart = pickle.load(open('model/Heart.pickle', 'rb'))
-        reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, cigarettePerDay, F_BPMeds, stroke, colLev, BMI, heartRate]])
+        reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, cigarettePerDay, F_BPMeds, F_stroke, colLev, BMI, heartRate]])
         # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
         resultHeart = str(reHeart[0])
 
-        # loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-        # reDiabetes = loaded_model_Diabetes.predict([[BP, colLev, BMI, entireLife100Cigarettes, DifWalk, gender, F_Age]])
-        # # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
-        # resultDiabetes = str(reDiabetes[0])
+        loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
+        reDiabetes = loaded_model_Diabetes.predict([[BP, colLev, BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+        # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
+        resultDiabetes = str(reDiabetes[0])
 
         output = {
                     'Heart' : resultHeart,
-                    'Diabetes' : "resultDiabetes"
+                    'Diabetes': resultDiabetes
                 }
 
     except Exception as e:
