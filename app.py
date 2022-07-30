@@ -179,11 +179,15 @@ def Predict_d():
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
-        if (gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""):
+        # gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
+
+        if ( gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="" or BP =="" or DifWalk=="" ):
             output = {
                         'Heart' : "reqFill",
                         'Diabetes': "reqFill"
                     }
+            return output
+
         else:
             Age = age
             F_Age = 0
@@ -255,12 +259,13 @@ def Predict_d():
                         'Heart' : resultHeart,
                         'Diabetes': resultDiabetes
                     }
+            return output
 
     except Exception as e:
         output = {'message' : str(e)}
+        return output
 
-
-    return output
+    # return output
 
 
 @app.route('/authUser',methods=['POST'])
