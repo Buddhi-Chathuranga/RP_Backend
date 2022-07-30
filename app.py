@@ -285,7 +285,7 @@ def get_one_movie():
 
 
 
-@app.route('/getUser',methods=['GET'])
+@app.route('/getUser',methods=['POST'])
 def api_each_user():
     request_json = request.get_json()
     user_id = request_json.get('id')
@@ -293,7 +293,12 @@ def api_each_user():
     if user_obj:
         return jsonify(user_obj)
     else:
-        return "Error"
+        data = {
+            "_id":{
+                "$oid":"Invalid"
+                }
+        }
+        return data
 
 
 @app.route('/userDelete/<user_id>',methods=['DELETE'])
