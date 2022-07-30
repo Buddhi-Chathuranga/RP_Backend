@@ -291,7 +291,7 @@ def api_each_user():
     user_id = request_json.get('id')
     user_obj = User.objects(id=user_id).first()
     if user_obj:
-        return jsonify(user_obj)
+        return "jsonify(user_obj)"
     else:
         return "Error"
 
