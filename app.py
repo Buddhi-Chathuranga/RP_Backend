@@ -259,7 +259,7 @@ def Predict_d():
                         'Heart' : resultHeart,
                         'Diabetes': resultDiabetes
                     }
-            return output
+            return output 
 
     except Exception as e:
         output = {'message' : str(e)}
