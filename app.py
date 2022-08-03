@@ -157,7 +157,7 @@ def update_User():
         return output
 
 
-@app.route('/predict',methods=['GET'])
+@app.route('/predict',methods=['GET','POST'])
 def Predict_d():
     try:
         request_json = request.get_json()
