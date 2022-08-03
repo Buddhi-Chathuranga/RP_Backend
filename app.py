@@ -265,7 +265,8 @@ def Predict_d():
     except Exception as e:
         output = {
                     'Heart' : "error",
-                    'Diabetes': "error"
+                    'Diabetes': "error",
+                    'Error': str(e)
                 }
         return output
 
