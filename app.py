@@ -180,7 +180,7 @@ def Predict_d():
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
-        # gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
+        gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
 
         if ( gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="" or BP =="" or DifWalk=="" ):
             output = {
@@ -256,11 +256,11 @@ def Predict_d():
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultDiabetes = str(reDiabetes[0])
 
-            output = {
-                        'Heart' : resultHeart,
-                        'Diabetes': resultDiabetes
-                    }
-            return output 
+        output = {
+                    'Heart' : resultHeart,
+                    'Diabetes': resultDiabetes
+                }
+        return output 
 
     except Exception as e:
         output = {
