@@ -180,85 +180,85 @@ def Predict_d():
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
-        gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
+        # gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
 
-        if ( gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="" or BP =="" or DifWalk=="" ):
-            output = {
-                        'Heart' : "reqFill",
-                        'Diabetes': "reqFill"
-                    }
-            return output
+        # if ( gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="" or BP =="" or DifWalk=="" ):
+        #     output = {
+        #                 'Heart' : "reqFill",
+        #                 'Diabetes': "reqFill"
+        #             }
+        #     return output
 
-        else:
-            Age = age
-            F_Age = 0
-            if( 18<=Age<=24 ):
-                F_Age=1
-            elif( 25<=Age<=29 ):
-                F_Age=2
-            elif( 30<=Age<=34 ):
-                F_Age=3
-            elif( 35<=Age<=39 ):
-                F_Age=4
-            elif( 40<=Age<=44 ):
-                F_Age=5
-            elif( 45<=Age<=49 ):
-                F_Age=6
-            elif( 50<=Age<=54 ):
-                F_Age=7
-            elif( 55<=Age<=59 ):
-                F_Age=8
-            elif( 60<=Age<=64 ):
-                F_Age=9
-            elif( 65<=Age<=69 ):
-                F_Age=10
-            elif( 70<=Age<=74 ):
-                F_Age=11
-            elif( 75<=Age<=79 ):
-                F_Age=12
-            elif( Age>=80 ):
-                F_Age=13
+        # else:
+        #     Age = age
+        #     F_Age = 0
+        #     if( 18<=Age<=24 ):
+        #         F_Age=1
+        #     elif( 25<=Age<=29 ):
+        #         F_Age=2
+        #     elif( 30<=Age<=34 ):
+        #         F_Age=3
+        #     elif( 35<=Age<=39 ):
+        #         F_Age=4
+        #     elif( 40<=Age<=44 ):
+        #         F_Age=5
+        #     elif( 45<=Age<=49 ):
+        #         F_Age=6
+        #     elif( 50<=Age<=54 ):
+        #         F_Age=7
+        #     elif( 55<=Age<=59 ):
+        #         F_Age=8
+        #     elif( 60<=Age<=64 ):
+        #         F_Age=9
+        #     elif( 65<=Age<=69 ):
+        #         F_Age=10
+        #     elif( 70<=Age<=74 ):
+        #         F_Age=11
+        #     elif( 75<=Age<=79 ):
+        #         F_Age=12
+        #     elif( Age>=80 ):
+        #         F_Age=13
 
-            F_currentSmoker = 1
-            if(currentSmoker=="No"):
-                F_currentSmoker = 0
+        #     F_currentSmoker = 1
+        #     if(currentSmoker=="No"):
+        #         F_currentSmoker = 0
 
-            F_stroke=1
-            if(stroke=="No"):
-                F_stroke=0
+        #     F_stroke=1
+        #     if(stroke=="No"):
+        #         F_stroke=0
 
-            BMI = weight/(height*height)
+        #     BMI = weight/(height*height)
 
-            F_DifWalk=1
-            if(DifWalk=="No"):
-                F_DifWalk=0
+        #     F_DifWalk=1
+        #     if(DifWalk=="No"):
+        #         F_DifWalk=0
             
-            F_Gender=1
-            if(gender=="Female"):
-                F_Gender=0
+        #     F_Gender=1
+        #     if(gender=="Female"):
+        #         F_Gender=0
 
-            F_entireLife100Cigarettes=1
-            if(entireLife100Cigarettes=="No"):
-                F_entireLife100Cigarettes=0
+        #     F_entireLife100Cigarettes=1
+        #     if(entireLife100Cigarettes=="No"):
+        #         F_entireLife100Cigarettes=0
 
-            F_BPMeds=1
-            if(str(BPMeds)=="No"):
-                F_BPMeds=0
+        #     F_BPMeds=1
+        #     if(str(BPMeds)=="No"):
+        #         F_BPMeds=0
         
 
-            loaded_model_Heart = pickle.load(open('model/Heart.pickle', 'rb'))
-            reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, cigarettePerDay, F_BPMeds, F_stroke, colLev, BMI, heartRate]])
-            # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
-            resultHeart = str(reHeart[0])
+        #     loaded_model_Heart = pickle.load(open('model/Heart.pickle', 'rb'))
+        #     reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, cigarettePerDay, F_BPMeds, F_stroke, colLev, BMI, heartRate]])
+        #     # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
+        #     resultHeart = str(reHeart[0])
 
-            loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-            reDiabetes = loaded_model_Diabetes.predict([[BP, colLev, BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
-            # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
-            resultDiabetes = str(reDiabetes[0])
+        #     loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
+        #     reDiabetes = loaded_model_Diabetes.predict([[BP, colLev, BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+        #     # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
+        #     resultDiabetes = str(reDiabetes[0])
 
         output = {
-                    'Heart' : resultHeart,
-                    'Diabetes': resultDiabetes
+                    'Heart' : 'resultHeart',
+                    'Diabetes': 'resultDiabetes'
                 }
         return output 
 
