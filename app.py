@@ -257,8 +257,8 @@ def Predict_d():
             resultDiabetes = str(reDiabetes[0])
 
         output = {
-                    'Heart' : 'resultHeart',
-                    'Diabetes': 'resultDiabetes'
+                    'Heart' : resultHeart,
+                    'Diabetes': resultDiabetes
                 }
         return output 
 
