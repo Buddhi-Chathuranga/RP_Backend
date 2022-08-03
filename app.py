@@ -77,9 +77,9 @@ def testing():
 
 @app.route('/test',methods=['GET'])
 def test():
-    request_json = request.get_json()
-    value1 = request_json.get('name')
-    return 'Testing '+value1
+    # request_json = request.get_json()
+    # value1 = request_json.get('name')
+    return 'Testing '
 
 
 @app.route('/addNewUser',methods=['POST'])
