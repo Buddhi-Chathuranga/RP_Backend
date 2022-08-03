@@ -8,6 +8,7 @@ from unicodedata import name
 import pymongo
 from bson import ObjectId 
 
+import sklearn
 import pickle
 
 from flask import Flask, request, make_response , jsonify
