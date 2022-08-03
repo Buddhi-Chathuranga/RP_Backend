@@ -262,7 +262,10 @@ def Predict_d():
             return output 
 
     except Exception as e:
-        output = {'message' : str(e)}
+        output = {
+                    'Heart' : "error",
+                    'Diabetes': "error"
+                }
         return output
 
     # return output
