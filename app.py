@@ -160,25 +160,25 @@ def update_User():
 @app.route('/predict',methods=['GET'])
 def Predict_d():
     try:
-        request_json = request.get_json()
-        user_id = request_json.get('id')
-        user_obj = User.objects(id=user_id).first()
+        # request_json = request.get_json()
+        # user_id = request_json.get('id')
+        # user_obj = User.objects(id=user_id).first()
         
-        gender = user_obj["gender"]
-        weight = int(user_obj["weight"])
-        height = int(user_obj["height"])
-        age = int(user_obj["age"])
-        colLev = int(user_obj["colLev"])
-        heartRate = int(user_obj["heartRate"])
-        stroke = user_obj["stroke"]
-        currentSmoker = user_obj["currentSmoker"]
-        entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
-        cigarettePerDay = int(user_obj["cigarettePerDay"])
-        BPMeds = user_obj["BPMeds"]
-        BP = user_obj["BP"]
-        DifWalk = user_obj["DifWalk"]
-        heartRisk = user_obj["heartRisk"]
-        DiabetesRisk = user_obj["diabetesRisk"]
+        # gender = user_obj["gender"]
+        # weight = int(user_obj["weight"])
+        # height = int(user_obj["height"])
+        # age = int(user_obj["age"])
+        # colLev = int(user_obj["colLev"])
+        # heartRate = int(user_obj["heartRate"])
+        # stroke = user_obj["stroke"]
+        # currentSmoker = user_obj["currentSmoker"]
+        # entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
+        # cigarettePerDay = int(user_obj["cigarettePerDay"])
+        # BPMeds = user_obj["BPMeds"]
+        # BP = user_obj["BP"]
+        # DifWalk = user_obj["DifWalk"]
+        # heartRisk = user_obj["heartRisk"]
+        # DiabetesRisk = user_obj["diabetesRisk"]
 
         # gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
 
