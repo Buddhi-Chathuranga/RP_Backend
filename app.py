@@ -165,15 +165,15 @@ def Predict_d():
         user_obj = User.objects(id=user_id).first()
         
         gender = user_obj["gender"]
-        weight = int(user_obj["weight"])
-        height = int(user_obj["height"])
-        age = int(user_obj["age"])
-        colLev = int(user_obj["colLev"])
-        heartRate = int(user_obj["heartRate"])
+        weight = user_obj["weight"]
+        height = user_obj["height"]
+        age = user_obj["age"]
+        colLev = user_obj["colLev"]
+        heartRate = user_obj["heartRate"]
         stroke = user_obj["stroke"]
         currentSmoker = user_obj["currentSmoker"]
         entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
-        cigarettePerDay = int(user_obj["cigarettePerDay"])
+        cigarettePerDay = user_obj["cigarettePerDay"]
         BPMeds = user_obj["BPMeds"]
         BP = user_obj["BP"]
         DifWalk = user_obj["DifWalk"]
@@ -181,15 +181,16 @@ def Predict_d():
         DiabetesRisk = user_obj["diabetesRisk"]
 
 
-        if ( str(gender == "") or str(weight) == "" or str(height == "") or str(age == "") or str(colLev == "") or str(heartRate == "") or str(stroke == "") or str(currentSmoker=="") or str(entireLife100Cigarettes == "") or str(cigarettePerDay == "") or str(BPMeds =="") or str(BP =="") or str(DifWalk=="") ):
+        if ( str(user_obj["gender"]) == "" or str(user_obj["weight"]) == "" or str(user_obj["height"]) == "" or str(user_obj["age"]) == "" or str(user_obj["colLev"]) == "" or str(user_obj["heartRate"]) == "" or str(user_obj["DifWalk"]) == "" or str(user_obj["BP"]) == "" or
+         str(user_obj["stroke"]) == "" or str(user_obj["currentSmoker"]) == "" or str(user_obj["entireLife100Cigarettes"]) == "" or str(user_obj["cigarettePerDay"]) == "" or str(user_obj["BPMeds"]) == ""  ):
             output = {
                         'Heart' : "reqFill",
-                        'Diabetes': "reqFill"
+                        'Diabetes': "reqFill",
                     }
             return output
 
         else:
-            Age = age
+            Age = int(age)
             F_Age = 0
             if( 18<=Age<=24 ):
                 F_Age=1
@@ -226,7 +227,7 @@ def Predict_d():
             if(stroke=="No"):
                 F_stroke=0
 
-            BMI = weight/(height*height)
+            BMI = int(weight)/(int(height)*int(height))
 
             F_DifWalk=1
             if(DifWalk=="No"):
@@ -246,12 +247,12 @@ def Predict_d():
         
 
             loaded_model_Heart = pickle.load(open('model/Heart.pickle', 'rb'))
-            reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, cigarettePerDay, F_BPMeds, F_stroke, colLev, BMI, heartRate]])
+            reHeart = loaded_model_Heart.predict([[F_Gender, age, F_currentSmoker, int(cigarettePerDay), F_BPMeds, F_stroke, colLev, BMI, int(heartRate)]])
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultHeart = str(reHeart[0])
 
             loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-            reDiabetes = loaded_model_Diabetes.predict([[BP, colLev, BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+            reDiabetes = loaded_model_Diabetes.predict([[BP, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultDiabetes = str(reDiabetes[0])
 
@@ -266,6 +267,7 @@ def Predict_d():
                     'Heart' : "error",
                     'Diabetes': "error",
                     'Error': str(e)
+                    
                 }
         return output
 
