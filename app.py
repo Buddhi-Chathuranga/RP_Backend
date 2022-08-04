@@ -180,9 +180,8 @@ def Predict_d():
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
-        gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="", BP =="" or DifWalk==""
 
-        if ( gender == "" or weight == "" or height == "" or age == "" or colLev == "" or heartRate == "" or stroke == "" or currentSmoker=="" or entireLife100Cigarettes == "" or cigarettePerDay == "" or BPMeds =="" or BP =="" or DifWalk=="" ):
+        if ( str(gender == "") or str(weight) == "" or str(height == "") or str(age == "") or str(colLev == "") or str(heartRate == "") or str(stroke == "") or str(currentSmoker=="") or str(entireLife100Cigarettes == "") or str(cigarettePerDay == "") or str(BPMeds =="") or str(BP =="") or str(DifWalk=="") ):
             output = {
                         'Heart' : "reqFill",
                         'Diabetes': "reqFill"
