@@ -309,7 +309,7 @@ def api_each_user():
                 "$oid":"Invalid"
                 }
         }
-        return data
+        return jsonify(data)
 
 
 @app.route('/userDelete/<user_id>',methods=['DELETE'])
