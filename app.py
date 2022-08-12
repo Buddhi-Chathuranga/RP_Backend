@@ -26,6 +26,7 @@ db = MongoEngine()
 db.init_app(app)
 
 class User(db.Document):
+    
     name = db.StringField()
     phone = db.StringField()
     email = db.StringField(unique=True)
