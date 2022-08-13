@@ -45,6 +45,9 @@ class User(db.Document):
     DifWalk = db.StringField()
     heartRisk = db.StringField()
     diabetesRisk = db.StringField()
+    humidity = db.StringField()
+    temp = db.StringField()
+    stepCount = db.StringField()
 
     def to_json(self):
         return  {
@@ -68,6 +71,9 @@ class User(db.Document):
             "DifWalk":self.DifWalk,
             "heartRisk":self.heartRisk,
             "diabetesRisk":self.diabetesRisk,
+            "humidity": self.humidity,
+            "temp":self.temp,
+            "stepCount":self.stepCount,
         }
 
 
@@ -101,7 +107,7 @@ def addUserFunction():
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
                         height = "", age = "", colLev = "", heartRate = "", stroke = "",currentSmoker="", 
                         entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="", BP ="", DifWalk="", 
-                        heartRisk="", diabetesRisk="")
+                        heartRisk="", diabetesRisk="", humidity="", temp="", stepCount="")
             user1.save()
             data = {
                 'Message': "Success"
@@ -317,6 +323,30 @@ def api_delete_user(user_id: str):
     user_obj = User.objects(id=user_id).first()
     user_obj.delete()
     return make_response('Delete Success', 200)
+
+
+
+@app.route('/stressAddData',methods=['POST'])
+def StressAddData():
+    try:
+        request_json = request.get_json()
+        uid = request_json.get('id')
+        humidity = request_json.get('humidity')
+        temp = request_json.get('temp')
+        stepCount = request_json.get('stepCount')
+        User.objects(id=uid).update(humidity = humidity, temp = temp, stepCount = stepCount)
+
+        output = {'Msg' : 'Success'}
+        return output
+
+
+    except Exception as e:
+        data = {
+            'Msg': e
+        }
+        return jsonify(data)
+
+
 
 if __name__ == '__main__':
     app.run()
