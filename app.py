@@ -368,20 +368,18 @@ def predictStress():
             return output
 
         else:
-            loaded_model_Heart = pickle.load(open('model/IT19151298.pickle', 'rb'))
+            loaded_model_Heart = pickle.load(open('model/Seliya.pickle', 'rb'))
             reHeart = loaded_model_Heart.predict([[float(humidity), float(temp), int(stepCount)]])
             resultStress = str(reHeart[0])
 
-        output = {
+            output = {
                     'Stress' : resultStress
-                
-                }
-        return output 
+              }
+            return output 
 
     except Exception as e:
         output = {
-                    'Heart' : "error",
-                    'Diabetes': "error",
+                    'Stress' : "error",
                     'Error': str(e)
                     
                 }
