@@ -347,6 +347,47 @@ def StressAddData():
         return jsonify(data)
 
 
+@app.route('/predictStress',methods=['GET','POST'])
+def predictStress():
+    try:
+        request_json = request.get_json()
+        user_id = request_json.get('id')
+        user_obj = User.objects(id=user_id).first()
+        
+        humidity =user_obj["humidity"]
+        temp = user_obj["temp"]
+        stepCount = user_obj["stepCount"]
+
+
+        if ( str(user_obj["humidity"]) == "" or str(user_obj["temp"]) == "" 
+                or str(user_obj["stepCount"]) == ""  ):
+            output = {
+                        'Heart' : "reqFill",
+                        'Diabetes': "reqFill",
+                    }
+            return output
+
+        else:
+            loaded_model_Heart = pickle.load(open('model/IT19151298.pickle', 'rb'))
+            reHeart = loaded_model_Heart.predict([[float(humidity), float(temp), int(stepCount)]])
+            resultStress = str(reHeart[0])
+
+        output = {
+                    'Stress' : resultStress
+                
+                }
+        return output 
+
+    except Exception as e:
+        output = {
+                    'Heart' : "error",
+                    'Diabetes': "error",
+                    'Error': str(e)
+                    
+                }
+        return output
+
+
 
 if __name__ == '__main__':
     app.run()
