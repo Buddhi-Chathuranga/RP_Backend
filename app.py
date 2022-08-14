@@ -347,6 +347,7 @@ def StressAddData():
         return jsonify(data)
 
 
+
 @app.route('/predictStress',methods=['GET','POST'])
 def predictStress():
     try:
