@@ -172,7 +172,7 @@ def update_User():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
-        sysBP = request_json.get('BP')
+        sysBP = request_json.get('sysBP')
         DifWalk = request_json.get('DifWalk')
 
 
