@@ -283,15 +283,15 @@ def Predict_d():
             resultHeart = str(reHeart[0])
 
             loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-            reDiabetes = loaded_model_Diabetes.predict([[SysBP2, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+            reDiabetes = loaded_model_Diabetes.predict([[sysBP, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultDiabetes = str(reDiabetes[0])
 
-        output = {
-                    'Heart' : resultHeart,
-                    'Diabetes': resultDiabetes
-                }
-        return output 
+            output = {
+                        'Heart' : resultHeart,
+                        'Diabetes': resultDiabetes
+                    }
+            return output 
 
     except Exception as e:
         output = {
