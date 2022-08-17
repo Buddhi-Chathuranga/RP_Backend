@@ -172,14 +172,14 @@ def update_User():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
-        SysBP = request_json.get('BP')
+        sysBP = request_json.get('BP')
         DifWalk = request_json.get('DifWalk')
 
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmoker = currentSmoker, 
             entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, 
-            BP = SysBP, DifWalk=DifWalk)
+            sysBP = sysBP, DifWalk=DifWalk)
 
         output = {'Msg' : 'Success'}
         return output
@@ -206,13 +206,13 @@ def Predict_d():
         entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
         cigarettePerDay = user_obj["cigarettePerDay"]
         BPMeds = user_obj["BPMeds"]
-        SysBP = user_obj["SysBP"]
+        sysBP = user_obj["sysBP"]
         DifWalk = user_obj["DifWalk"]
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
 
-        if ( str(user_obj["gender"]) == "" or str(user_obj["weight"]) == "" or str(user_obj["height"]) == "" or str(user_obj["age"]) == "" or str(user_obj["colLev"]) == "" or str(user_obj["heartRate"]) == "" or str(user_obj["DifWalk"]) == "" or str(user_obj["SysBP"]) == "" or
+        if ( str(user_obj["gender"]) == "" or str(user_obj["weight"]) == "" or str(user_obj["height"]) == "" or str(user_obj["age"]) == "" or str(user_obj["colLev"]) == "" or str(user_obj["heartRate"]) == "" or str(user_obj["DifWalk"]) == "" or str(user_obj["sysBP"]) == "" or
          str(user_obj["stroke"]) == "" or str(user_obj["currentSmoker"]) == "" or str(user_obj["entireLife100Cigarettes"]) == "" or str(user_obj["cigarettePerDay"]) == "" or str(user_obj["BPMeds"]) == ""  ):
             output = {
                         'Heart' : "reqFill",
@@ -283,7 +283,7 @@ def Predict_d():
             resultHeart = str(reHeart[0])
 
             loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-            reDiabetes = loaded_model_Diabetes.predict([[SysBP, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+            reDiabetes = loaded_model_Diabetes.predict([[SysBP2, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultDiabetes = str(reDiabetes[0])
 
