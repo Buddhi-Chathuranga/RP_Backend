@@ -41,13 +41,25 @@ class User(db.Document):
     entireLife100Cigarettes = db.StringField()
     cigarettePerDay = db.StringField()
     BPMeds = db.StringField()
-    BP = db.StringField()
+    sysBP = db.StringField()
+    disBP = db.StringField()
     DifWalk = db.StringField()
     heartRisk = db.StringField()
     diabetesRisk = db.StringField()
     humidity = db.StringField()
     temp = db.StringField()
     stepCount = db.StringField()
+
+    bodyDisoder = db.StringField()
+    insulinCount = db.StringField()
+    glucose = db.StringField()
+    alcoholicsStatus = db.StringField()
+    activityStatus = db.StringField()
+    bodyFat = db.StringField()
+    gripForce = db.StringField()
+    SitAndBendForwardLength = db.StringField()
+    SitUpsCount = db.StringField()
+    BroadJumpLength = db.StringField()
 
     def to_json(self):
         return  {
@@ -67,13 +79,24 @@ class User(db.Document):
             "entireLife100Cigarettes":self.entireLife100Cigarettes,
             "cigarettePerDay":self.cigarettePerDay,
             "BPMeds":self.BPMeds,
-            "BP":self.BP,
+            "sysBP":self.sysBP,
+            "disBP":self.disBP,
             "DifWalk":self.DifWalk,
             "heartRisk":self.heartRisk,
             "diabetesRisk":self.diabetesRisk,
             "humidity": self.humidity,
             "temp":self.temp,
             "stepCount":self.stepCount,
+            "bodyDisoder":self.bodyDisoder,
+            "insulinCount":self.insulinCount,
+            "glucose":self.glucose,
+            "alcoholicsStatus":self.alcoholicsStatus,
+            "activityStatus":self.activityStatus,
+            "bodyFat":self.bodyFat,
+            "gripForce":self.gripForce,
+            "SitAndBendForwardLength":self.SitAndBendForwardLength,
+            "SitUpsCount":self.SitUpsCount,
+            "BroadJumpLength":self.BroadJumpLength,
         }
 
 
@@ -106,8 +129,10 @@ def addUserFunction():
         else: 
             user1 = User(name=name, phone=phone, email=email, password=password, gender = "", weight = "",
                         height = "", age = "", colLev = "", heartRate = "", stroke = "",currentSmoker="", 
-                        entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="", BP ="", DifWalk="", 
-                        heartRisk="", diabetesRisk="", humidity="", temp="", stepCount="")
+                        entireLife100Cigarettes = "", cigarettePerDay = "", BPMeds ="", sysBP ="", disBP="", DifWalk="", 
+                        heartRisk="", diabetesRisk="", humidity="", temp="", stepCount="", bodyDisoder="",insulinCount="",
+                        glucose="",activityStatus="", bodyFat="", gripForce="", SitAndBendForwardLength="",SitUpsCount="",
+                        BroadJumpLength="",)
             user1.save()
             data = {
                 'Message': "Success"
@@ -147,14 +172,14 @@ def update_User():
         entireLife100Cigarettes = request_json.get('entireLife100Cigarettes')
         cigarettePerDay = request_json.get('cigarettePerDay')
         BPMeds = request_json.get('BPMeds')
-        BP = request_json.get('BP')
+        SysBP = request_json.get('BP')
         DifWalk = request_json.get('DifWalk')
 
 
         User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
             age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmoker = currentSmoker, 
             entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, 
-            BP = BP, DifWalk=DifWalk)
+            BP = SysBP, DifWalk=DifWalk)
 
         output = {'Msg' : 'Success'}
         return output
@@ -181,13 +206,13 @@ def Predict_d():
         entireLife100Cigarettes = user_obj["entireLife100Cigarettes"]
         cigarettePerDay = user_obj["cigarettePerDay"]
         BPMeds = user_obj["BPMeds"]
-        BP = user_obj["BP"]
+        SysBP = user_obj["SysBP"]
         DifWalk = user_obj["DifWalk"]
         heartRisk = user_obj["heartRisk"]
         DiabetesRisk = user_obj["diabetesRisk"]
 
 
-        if ( str(user_obj["gender"]) == "" or str(user_obj["weight"]) == "" or str(user_obj["height"]) == "" or str(user_obj["age"]) == "" or str(user_obj["colLev"]) == "" or str(user_obj["heartRate"]) == "" or str(user_obj["DifWalk"]) == "" or str(user_obj["BP"]) == "" or
+        if ( str(user_obj["gender"]) == "" or str(user_obj["weight"]) == "" or str(user_obj["height"]) == "" or str(user_obj["age"]) == "" or str(user_obj["colLev"]) == "" or str(user_obj["heartRate"]) == "" or str(user_obj["DifWalk"]) == "" or str(user_obj["SysBP"]) == "" or
          str(user_obj["stroke"]) == "" or str(user_obj["currentSmoker"]) == "" or str(user_obj["entireLife100Cigarettes"]) == "" or str(user_obj["cigarettePerDay"]) == "" or str(user_obj["BPMeds"]) == ""  ):
             output = {
                         'Heart' : "reqFill",
@@ -258,7 +283,7 @@ def Predict_d():
             resultHeart = str(reHeart[0])
 
             loaded_model_Diabetes = pickle.load(open('model/Diabetes.pickle', 'rb'))
-            reDiabetes = loaded_model_Diabetes.predict([[BP, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
+            reDiabetes = loaded_model_Diabetes.predict([[SysBP, int(colLev), BMI, F_entireLife100Cigarettes, F_DifWalk, F_Gender, F_Age]])
             # re = loaded_model.predict([[0, 61, 1, 30.0, 0.0, 0, 225.0, 28.58, 65.0]])
             resultDiabetes = str(reDiabetes[0])
 
