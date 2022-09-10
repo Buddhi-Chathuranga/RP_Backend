@@ -156,7 +156,7 @@ def api_users():
 
 
 
-@app.route('/Update',methods=['PUT','POST','GET'])
+@app.route('/Update',methods=['PUT'])
 def update_User():
     try:
         request_json = request.get_json()
@@ -268,15 +268,15 @@ def update_User():
 
             #End of make prediction
 
-        User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
-            age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmoker = currentSmoker, 
-            entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, 
-            sysBP = sysBP, disBP=disBP, DifWalk=DifWalk, bodyDisoder =bodyDisoder , insulinCount =insulinCount , glucose = glucose,
-            alcoholicsStatus =alcoholicsStatus , activityStatus = activityStatus, bodyFat = bodyFat, gripForce = gripForce,
-            SitAndBendForwardLength = SitAndBendForwardLength,SitUpsCount = SitUpsCount, BroadJumpLength = BroadJumpLength,
-             heartRisk="HeartRisk", diabetesRisk="DiabetesRisk")
+            User.objects(id=uid).update(gender = gender, weight = weight, height = height, 
+                age = age, colLev = colLev, heartRate = heartRate, stroke =stroke, currentSmoker = currentSmoker, 
+                entireLife100Cigarettes = entireLife100Cigarettes, cigarettePerDay = cigarettePerDay, BPMeds = BPMeds, 
+                sysBP = sysBP, disBP=disBP, DifWalk=DifWalk, bodyDisoder =bodyDisoder , insulinCount =insulinCount , glucose = glucose,
+                alcoholicsStatus =alcoholicsStatus , activityStatus = activityStatus, bodyFat = bodyFat, gripForce = gripForce,
+                SitAndBendForwardLength = SitAndBendForwardLength,SitUpsCount = SitUpsCount, BroadJumpLength = BroadJumpLength,
+                heartRisk="HeartRisk", diabetesRisk="DiabetesRisk")
 
-        output = {'Msg' : 'Success'}
+            output = {'Msg' : 'Success'}
         return output
     except Exception as e:
         output = {'Msg' : str(e)}
