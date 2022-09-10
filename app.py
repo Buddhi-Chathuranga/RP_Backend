@@ -276,7 +276,7 @@ def update_User():
             sysBP = sysBP, disBP=disBP, DifWalk=DifWalk, bodyDisoder =bodyDisoder , insulinCount =insulinCount , glucose = glucose,
             alcoholicsStatus =alcoholicsStatus , activityStatus = activityStatus, bodyFat = bodyFat, gripForce = gripForce,
             SitAndBendForwardLength = SitAndBendForwardLength,SitUpsCount = SitUpsCount, BroadJumpLength = BroadJumpLength,
-            heartRisk="te", diabetesRisk="te")
+            heartRisk=HeartRisk, diabetesRisk=DiabetesRisk)
 
         output = {'Msg' : 'Success'}
         return output
