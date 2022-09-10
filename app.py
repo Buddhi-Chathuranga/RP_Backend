@@ -156,7 +156,7 @@ def api_users():
 
 
 
-@app.route('/Update',methods=['PUT','POST'])
+@app.route('/Update',methods=['PUT','POST','GET'])
 def update_User():
     try:
         request_json = request.get_json()
