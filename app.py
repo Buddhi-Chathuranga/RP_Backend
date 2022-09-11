@@ -404,7 +404,7 @@ def Predict_d():
 
 
 
-@app.route('/getRisks',methods=['GET'])
+@app.route('/getRisks',methods=['GET','POST'])
 def get_risks():
     try:
         request_json = request.get_json()
