@@ -404,6 +404,31 @@ def Predict_d():
 
 
 
+@app.route('/getRisks',methods=['GET'])
+def get_risks():
+    try:
+        request_json = request.get_json()
+        user_id = request_json.get('id')
+        user_obj = User.objects(id=user_id).first()
+        
+        heartRisk = user_obj["heartRisk"]
+        diabetesRisk = user_obj["diabetesRisk"]
+        if user_obj:
+            data = {
+            'heartRisk': heartRisk,
+            'diabetesRisk':diabetesRisk
+            }
+            return jsonify(data)
+    except Exception as e:
+        data = {
+            'heartRisk': "error",
+            'diabetesRisk': "error"
+        }
+        return jsonify(data)
+
+
+
+
 @app.route('/authUser',methods=['POST'])
 def get_one_movie():
     request_json = request.get_json()
