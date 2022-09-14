@@ -418,13 +418,13 @@ def get_risks():
             'heartRisk': heartRisk,
             'diabetesRisk':diabetesRisk
             }
-            return jsonify(data)
     except Exception as e:
         data = {
             'heartRisk': "error",
             'diabetesRisk': "error"
         }
-        return jsonify(data)
+
+    return jsonify(data)
 
 
 
