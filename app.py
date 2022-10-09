@@ -279,6 +279,31 @@ def Predict_d():
     # return output
 
 
+@app.route('/getRisks',methods=['GET','POST'])
+def get_risks():
+    try:
+        request_json = request.get_json()
+        user_id = request_json.get('id')
+        user_obj = User.objects(id=user_id).first()
+        
+        heartRisk = user_obj["heartRisk"]
+        diabetesRisk = user_obj["diabetesRisk"]
+        if user_obj:
+            data = {
+            'heartRisk': heartRisk,
+            'diabetesRisk':diabetesRisk
+            }
+    except Exception as e:
+        data = {
+            'heartRisk': "error",
+            'diabetesRisk': "error"
+        }
+
+    return jsonify(data)
+
+
+
+
 @app.route('/authUser',methods=['POST'])
 def get_one_movie():
     request_json = request.get_json()
@@ -322,6 +347,68 @@ def api_delete_user(user_id: str):
     user_obj = User.objects(id=user_id).first()
     user_obj.delete()
     return make_response('Delete Success', 200)
+
+
+
+@app.route('/stressAddData',methods=['POST'])
+def StressAddData():
+    try:
+        request_json = request.get_json()
+        uid = request_json.get('id')
+        humidity = request_json.get('humidity')
+        temp = request_json.get('temp')
+        stepCount = request_json.get('stepCount')
+        User.objects(id=uid).update(humidity = humidity, temp = temp, stepCount = stepCount)
+
+        output = {'Msg' : 'Success'}
+        return output
+
+
+    except Exception as e:
+        data = {
+            'Msg': e
+        }
+        return jsonify(data)
+
+
+
+@app.route('/predictStress',methods=['GET','POST'])
+def predictStress():
+    try:
+        request_json = request.get_json()
+        user_id = request_json.get('id')
+        user_obj = User.objects(id=user_id).first()
+        
+        humidity =user_obj["humidity"]
+        temp = user_obj["temp"]
+        stepCount = user_obj["stepCount"]
+
+
+        if ( str(user_obj["humidity"]) == "" or str(user_obj["temp"]) == "" 
+                or str(user_obj["stepCount"]) == ""  ):
+            output = {
+                        'Heart' : "reqFill",
+                        'Diabetes': "reqFill",
+                    }
+            return output
+
+        else:
+            loaded_model_Heart = pickle.load(open('model/Seliya.pickle', 'rb'))
+            reHeart = loaded_model_Heart.predict([[float(humidity), float(temp), int(stepCount)]])
+            resultStress = str(reHeart[0])
+
+            output = {
+                    'Stress' : resultStress
+              }
+            return output 
+
+    except Exception as e:
+        output = {
+                    'Stress' : "error",
+                    'Error': str(e)
+                    
+                }
+        return output
 
 
 app.register_blueprint(MealPlan, url_prefix='/mealplan')
