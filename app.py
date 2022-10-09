@@ -8,6 +8,10 @@ from unicodedata import name
 import pymongo
 from bson import ObjectId 
 
+from Routes.mealPlan import MealPlan
+from Routes.exercisePlan import ExercisePlan
+from Routes.Execise import Exercise
+
 import sklearn
 import pickle
 
@@ -15,6 +19,7 @@ from flask import Flask, request, make_response , jsonify
 from flask_mongoengine import MongoEngine
 
 app  = Flask(__name__)
+app.config.from_object('config')
 
 database_name = 'user_db'
 DB_URI = 'mongodb+srv://buddhi:1234@database.x8fev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
@@ -317,6 +322,11 @@ def api_delete_user(user_id: str):
     user_obj = User.objects(id=user_id).first()
     user_obj.delete()
     return make_response('Delete Success', 200)
+
+
+app.register_blueprint(MealPlan, url_prefix='/mealplan')
+app.register_blueprint(ExercisePlan,url_prefix='/exerciseplan')
+app.register_blueprint(Exercise,url_prefix='/exercise')
 
 if __name__ == '__main__':
     app.run()
