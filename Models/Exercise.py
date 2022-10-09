@@ -13,6 +13,6 @@ db.init_app(app)
 class Exercise (db.Document):
     ID=db.StringField(required=True, primary_key=True)
     Name = db.StringField(required=True)
-    Description=db.StringField(required=True)
+    Description=db.StringField()
     Image = db.StringField(required=True)
     MET = db.FloatField(required=True)

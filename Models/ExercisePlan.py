@@ -13,7 +13,7 @@ db.init_app(app)
 EType = ('Aerobic_exercises','Anerobic_exercises','Streching_exercises')
 
 class ExercisePlan(db.Document):
-    ID = db.StringField(required=True, primary_key=True)
+    ID = db.StringField(required=True)
     ExerciseType = db.StringField(required=True,choices=EType)
     ExerciseList= db.ListField(db.StringField(), required=True)
     

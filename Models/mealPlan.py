@@ -17,7 +17,7 @@ MealCategory=('Heart','Diabetic')
 MealType = ('veg','non-veg')
 
 class MealPlan(db.Document):
-    ID = db.StringField(required=True, primary_key=True)
+    ID = db.StringField(required=True)
     MealCategory= db.StringField(required=True, choices=MealCategory)
     MealType = db.StringField(required=True, choices=MealType)
     CaloryLevel= db.IntField()
