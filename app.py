@@ -205,10 +205,10 @@ def update_User():
             heartRisk=HeartRisk, diabetesRisk=DiabetesRisk)
 
         output = {'Msg' : 'Success'}
-        return output
+        return jsonify(output)
     except Exception as e:
         output = {'Msg' : str(e)}
-        return output
+        return jsonify(output)
 
 
 @app.route('/predict',methods=['GET','POST'])
