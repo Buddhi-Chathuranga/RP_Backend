@@ -365,7 +365,7 @@ def get_one_movie():
     if (user_obj):
 
         # return jsonify(user_obj.to_json())
-       return json.dumps(user_obj.to_json())
+       return jsonify(user_obj.to_json())
     else:
         data = {
             "_id":{
