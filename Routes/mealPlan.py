@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request
 from Controllers.MealPlan import GetAllMealPlan,InsertMealPlan,GetOneMealPlan,UpdateMealPlan,DeleteMealPlan
-
+from Controllers.MealPlanOperation import GetheartMealPlanToUser,GetdiabetesMealPlanToUser
 MealPlan = Blueprint("MealPlan",__name__)
 
 
@@ -32,3 +32,12 @@ def PutMealPlan(ID):
 @MealPlan.route('/<ID>', methods=['DELETE'])
 def DeleteMealPlanByID(ID):
     return DeleteMealPlan(ID)
+
+@MealPlan.route('/diabetes/<ID>', methods=['Get'])
+def GetDiabetesMealPlan(ID):
+    return GetdiabetesMealPlanToUser(ID)
+
+@MealPlan.route('/heart/<ID>', methods=['Get'])
+def GetHeartMealPlan(ID):
+    return GetheartMealPlanToUser(ID)
+

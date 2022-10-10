@@ -5,15 +5,18 @@ import json
 
 def InsertExercise(request_list):
         try:
-                if request_list:
-                        Exercise01 = Exercise()
-                        Exercise01.ID = request_list['ID']
-                        Exercise01.Name = request_list['Name']
-                        Exercise01.Description = request_list['Description']
-                        Exercise01.Image = request_list['Image']
-                        Exercise01.MET = request_list['MET']
-                        result = Exercise01.save()
-                        resultList = json.loads(result.to_json())
+                resultList = []
+                for request_data in request_list:
+                        if request_data:
+                                Exercise01 = Exercise()
+                                Exercise01.ID = request_data['ID']
+                                Exercise01.Name = request_data['Name']
+                                if('Description' in request_data):
+                                        Exercise01.Description = request_data['Description']
+                                Exercise01.Image = request_data['Image']
+                                Exercise01.MET = request_data['MET']
+                                result = Exercise01.save()
+                                resultList.append(json.loads(result.to_json()))
                 return {"result":resultList}
         except Exception as e:
                 return  {"error":str(e)}

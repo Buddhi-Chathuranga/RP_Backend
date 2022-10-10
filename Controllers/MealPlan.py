@@ -45,11 +45,17 @@ def GetAllMealPlan():
     
 def GetOneMealPlan(ID):
         try:
-                result = MealPlan.objects(ID=ID).first()
+                result = MealPlan.objects(ID=ID)
                 return {"result":json.loads(result.to_json())}
         except Exception as e:
                 return  {"error":str(e)}
-      
+
+def GetMealPlanByCategory(ID,MealCategory):
+        try:
+                result = MealPlan.objects(ID=ID, MealCategory=MealCategory)
+                return {"result":json.loads(result.to_json())}
+        except Exception as e:
+                return  {"error":str(e)}
     
 def UpdateMealPlan(ID,Updates):
         try:
@@ -89,4 +95,6 @@ def DeleteMealPlan(ID):
                 return {"result":json.loads(result.to_json())}
         except Exception as e:
                 return  {"error":str(e)}
+
+
         
