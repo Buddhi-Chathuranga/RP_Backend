@@ -368,9 +368,7 @@ def get_one_movie():
        return jsonify(user_obj.to_json())
     else:
         data = {
-            "_id":{
-                "$oid":"Invalid"
-                }
+            "_id":"Invalid"
         }
         return jsonify(data)
     # return make_response('Valid')
