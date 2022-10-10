@@ -361,9 +361,11 @@ def get_one_movie():
     email = request_json.get('email')
     password = request_json.get('password')
     user_obj = User.objects(email=email, password=password).first()
+  
     if (user_obj):
 
-        return jsonify(user_obj)
+        # return jsonify(user_obj.to_json())
+       return jsonify(user_obj.to_json())
     else:
         data = {
             "_id":{
