@@ -238,7 +238,7 @@ def update_User():
         if(stroke=="No"):
             F_stroke=0
 
-        BMI = int(weight)/(((int(height))/(100))*int(height))
+        BMI = int(weight)/(((int(height))/(100))*(int(height)/(100)))
 
         F_DifWalk=1
         if(DifWalk=="No"):
@@ -355,7 +355,7 @@ def Predict_d():
             if(stroke=="No"):
                 F_stroke=0
 
-            BMI = int(weight)/(((int(height))/(100))*int(height))
+            BMI = int(weight)/(((int(height))/(100))*(int(height)/(100)))
 
             F_DifWalk=1
             if(DifWalk=="No"):
