@@ -32,10 +32,25 @@ class User(db.Document):
     entireLife100Cigarettes = db.StringField()
     cigarettePerDay = db.StringField()
     BPMeds = db.StringField()
-    BP = db.StringField()
+    sysBP = db.StringField()
+    disBP = db.StringField()
     DifWalk = db.StringField()
     heartRisk = db.StringField()
     diabetesRisk = db.StringField()
+    humidity = db.StringField()
+    temp = db.StringField()
+    stepCount = db.StringField()
+
+    bodyDisoder = db.StringField()
+    insulinCount = db.StringField()
+    glucose = db.StringField()
+    alcoholicsStatus = db.StringField()
+    activityStatus = db.StringField()
+    bodyFat = db.StringField()
+    gripForce = db.StringField()
+    SitAndBendForwardLength = db.StringField()
+    SitUpsCount = db.StringField()
+    BroadJumpLength = db.StringField()
 
     def to_json(self):
         return  {
@@ -55,8 +70,22 @@ class User(db.Document):
             "entireLife100Cigarettes":self.entireLife100Cigarettes,
             "cigarettePerDay":self.cigarettePerDay,
             "BPMeds":self.BPMeds,
-            "BP":self.BP,
+            "sysBP":self.sysBP,
+            "disBP":self.disBP,
             "DifWalk":self.DifWalk,
             "heartRisk":self.heartRisk,
             "diabetesRisk":self.diabetesRisk,
+            "humidity": self.humidity,
+            "temp":self.temp,
+            "stepCount":self.stepCount,
+            "bodyDisoder":self.bodyDisoder,
+            "insulinCount":self.insulinCount,
+            "glucose":self.glucose,
+            "alcoholicsStatus":self.alcoholicsStatus,
+            "activityStatus":self.activityStatus,
+            "bodyFat":self.bodyFat,
+            "gripForce":self.gripForce,
+            "SitAndBendForwardLength":self.SitAndBendForwardLength,
+            "SitUpsCount":self.SitUpsCount,
+            "BroadJumpLength":self.BroadJumpLength,
         }
