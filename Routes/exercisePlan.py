@@ -1,6 +1,6 @@
 from flask import Blueprint,request
 from Controllers.ExercisePlan import GetAllExercisePlan,InsertExercisePlan,GetOneExercisePlan,UpdateExercisePlan,DeleteExercisePlan
-
+from Controllers.ExercisePlanOperation import GetExercisePlanToUser
 ExercisePlan=Blueprint("ExercisePlan",__name__)
 
 @ExercisePlan.route("/", methods=['GET'])
@@ -28,3 +28,9 @@ def PutExercisePlan(ID):
 @ExercisePlan.route('/<ID>', methods=['DELETE'])
 def DeleteExercisePlanByID(ID):
     return DeleteExercisePlan(ID)
+
+
+@ExercisePlan.route('/exercise/<ID>', methods=['GET'])
+def GetExercisePlanByUser(ID):
+    return GetExercisePlanToUser(ID)
+

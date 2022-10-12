@@ -1,6 +1,6 @@
 
 from Models.Exercise import Exercise
-
+from flask import jsonify
 import json
 
 def InsertExercise(request_list):
@@ -31,7 +31,11 @@ def GetAllExercise():
 def GetOneExercise(ID):
         try:
                 result = Exercise.objects(ID=ID).first()
-                return {"result":json.loads(result.to_json())}
+                if(result):
+                       
+                        return {"result":json.loads(result.to_json())}
+                else:
+                        return {"result":None}
         except Exception as e:
                 return  {"error":str(e)}
 

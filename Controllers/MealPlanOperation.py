@@ -32,7 +32,7 @@ def GetdiabetesMealPlanToUser(ID):
             'activity_level': 'none',
             'goals': 'gain',
             'foodtype': 'Non-Veg',
-            'risk': 'low',
+            'risk': 'Low',
         }
         mealID = Get_diabetes_mealplan(Data)
         return GetMealPlanByCategory(mealID,'Diabetic')

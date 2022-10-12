@@ -20,17 +20,18 @@ def InsertExercisePlan(request_list):
 def GetAllExercisePlan():
         try:
                 result = ExercisePlan.objects()
-                for i in result.to_json():
+                result= json.loads(result.to_json())
+                for i in result:
                         execise=[] 
                         print("ExercisePlan",i)
                         for j in i['ExerciseList']:
                         #    execise.append(GetOneExercise(j))
-                           print("Exercise",j)
-                           j= j.replace(j,json.dumps(GetOneExercise(j)))
-                           execise.append(j)
-                        print("ReplaceExercise",execise)
+                           
+                        #    j= j.replace(j,json.dumps(GetOneExercise(j)))
+                             Eresult= GetOneExercise(j)
+                             execise.append(Eresult['result'])
                         i['ExerciseList']=execise
-                return {"result":json.loads(result)}
+                return {"result":result}
         except Exception as e:
                 return  {"error":str(e)}
 
@@ -62,5 +63,8 @@ def DeleteExercisePlan(ID):
                 return {"result":json.loads(result.to_json())}
         except Exception as e:
                 return  {"error":str(e)}
+
+
+
 
                 
