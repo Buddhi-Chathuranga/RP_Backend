@@ -368,9 +368,7 @@ def get_one_movie():
        return jsonify(user_obj.to_json())
     else:
         data = {
-            "_id":{
-                "$oid":"Invalid"
-                }
+            "_id":"Invalid"
         }
         return jsonify(data)
     # return make_response('Valid')
@@ -385,7 +383,7 @@ def api_each_user():
     user_id = request_json.get('id')
     user_obj = User.objects(id=user_id).first()
     if user_obj:
-        return jsonify(user_obj)
+        return jsonify(user_obj.to_json())
     else:
         data = {
             "_id":{
