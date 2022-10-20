@@ -11,27 +11,27 @@ def GetdiabetesMealPlanToUser(ID):
 
         Data = {
             'Gender': 'Male',
-            'age': 50,
-            'Polyuria': 'No',
+            'age': 70,
+            'Polyuria': 'Yes',
             'Polydipsia': 'Yes',
             'sudden_weight_loss': 'No',
             'weakness': 'Yes',
-            'Polyphagia': 'No',
-            'Genital_thrush': 'No',
-            'visual_blurring': 'No',
+            'Polyphagia': 'Yes',
+            'Genital_thrush': 'Yes',
+            'visual_blurring': 'Yes',
             'Itching': 'Yes',
             'Irritability': 'No',
             'delayed_healing': 'Yes',
-            'partial_paresis': 'No',
+            'partial_paresis': 'Yes',
             'muscle_stiffness': 'Yes',
             'Alopecia': 'Yes',
             'Obesity': 'Yes',
             # -------------------------------------
-            'height': 5.7,  # feet
-            'weight': 85,  # kg
+            'height': 50,  # feet
+            'weight': 50,  # kg
             'activity_level': 'none',
             'goals': 'gain',
-            'foodtype': 'Non-Veg',
+            'foodtype': 'Veg',
             'risk': 'Low',
         }
         mealID = Get_diabetes_mealplan(Data)

@@ -31,7 +31,7 @@ def InsertMealPlan(request_list):
                                 MealPlan01.Contains = request_data['Contains']
                         result = MealPlan01.save()
                         resultList.append(json.loads(result.to_json()))
-               
+                        
                 return {"result":resultList}
         except Exception as e:
                 return {"error":str(e)}
